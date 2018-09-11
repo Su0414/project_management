@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2018_09_11_150023) do
     t.string "last_name"
     t.string "email"
     t.string "password_digest"
-    t.string "role"
+    t.boolean "admin"
   end
 
 end

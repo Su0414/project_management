@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
-    if !current_user.role =="owner"
+    if !current_user.admin
       if current_user != @user
         redirect_to root_path
       end
@@ -40,6 +40,6 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :role )
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :admin )
   end
 end

@@ -3,13 +3,26 @@
   <head>
     <title>ProjectManagement</title>
     <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+  <a href="<%= root_url %>"/>Home</a>
+    
+              <% if current_user %>
+                <li><%= link_to "Hello, #{current_user.name}!", user_path(current_user) %></li>
+                <li><%= link_to "Projects Dashboard", projects_path %></li>
+                <li><%= link_to "Log Out", signout_path, method: :delete %></li>
+              <% else %>
+                <li><%= link_to "Sign Up", new_user_path %></li>
+                <li><%= link_to "Sign In", signin_path %></li>
+              <% end %>
+
+
+     
+      <div>
+        <%= yield %>
+      </div>
   </body>
 </html>

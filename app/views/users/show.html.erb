@@ -1,2 +1,24 @@
 <h1>Users#show</h1>
 <p>Find me in app/views/users/show.html.erb</p>
+
+<% if @message %>
+  <div class="center alert">
+    <p><%= @message %></p>
+  </div>
+<% end %>
+
+<% if @user.role =="owner" %>
+<p>Owner</p>
+<% end %>
+Name:
+<%= @user.first_name %> <%= @user.last_name %>
+
+Email:
+<%= @user.email %>
+
+Role:
+<%= @user.role %>
+
+<p><%= link_to 'Edit', edit_user_path(@user) %></p>
+
+<%= link_to 'Projects Dashboard', projects_path %>

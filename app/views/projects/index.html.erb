@@ -26,7 +26,11 @@
          <td><%= project.name %></td>
         <td><%= project.description %></td>
         <% if current_user.admin %>
-          <td><%= link_to "Show #{project.name}", project_path(project) %></td>
+          <td>
+            <%= link_to "Show #{project.name}", project_path(project) %>
+            <%= link_to "Edit #{project.name}", [:edit, project] %>
+            <%= link_to "Delete #{project.name}" %>
+          </td>
         <% else %>
           <td><%= link_to "Show Tasks #{project.name}", project_path(project) %></td>
         <% end %>
@@ -35,10 +39,6 @@
   </tbody>
 </table>
 <br>
- <% if @user %>
-  <p>
-    <%= link_to "Back to profile", user_path(@user), {:class => "btn btn-primary"} %>
-  </p>
-<% else %>
-  <p><%= link_to 'New Project', new_project_path %></p>
+ <% if current_user.admin %>  
+  <p><%= link_to 'New Project', new_project_path %></p>  
 <% end %>

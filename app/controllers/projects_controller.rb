@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_action :set_project, only: [:show]
+
   def index
     @projects = Project.all
     if current_user.admin
@@ -17,8 +19,25 @@ class ProjectsController < ApplicationController
   end
 
   def create 
+    @project = Project.new(project_params)
+    if @project.save
+      redirect_to @project
+    else 
+      render :new
+    end
   end
 
   def edit
   end
+
+
+  private
+  def set_project
+    @project = Project.find_by(id: params[:id])
+  end 
+
+  def project_params
+    params.require(:project).permit(:name, :description)
+  end
+
 end

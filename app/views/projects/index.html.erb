@@ -1,2 +1,44 @@
-<h1>Projects#index</h1>
-<p>Find me in app/views/projects/index.html.erb</p>
+<h1>Projects Dashboard</h1>
+<p>Current Active Projects for </p>
+
+
+    <% @users.each do |user|%>
+        <%= user.first_name %>
+        <%= user.last_name %>
+    <% end %>
+
+
+<h1>List of projects</h1>
+ <table class="table">
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+   <tbody>
+    <tr>
+      <td><strong>Name</strong></td>
+      <td><strong>Description</strong></td>
+      <td><strong>Details</strong></td>
+    </tr>
+    <% @projects.each do |project| %>
+      <tr>
+         <td><%= project.name %></td>
+        <td><%= project.description %></td>
+        <% if current_user.admin %>
+          <td><%= link_to "Show #{project.name}", project_path(project) %></td>
+        <% else %>
+          <td><%= link_to "Show Tasks #{project.name}", project_path(project) %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+ <% if @user %>
+  <p>
+    <%= link_to "Back to profile", user_path(@user), {:class => "btn btn-primary"} %>
+  </p>
+<% else %>
+  <p><%= link_to 'New Project', new_project_path %></p>
+<% end %>

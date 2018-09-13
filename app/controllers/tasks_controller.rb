@@ -13,6 +13,13 @@ class TasksController < ApplicationController
   end
 
   def destroy
+    @task = @project.tasks.find_by(params[:id])
+    if @task.delete 
+      flash[:success] = "Task was deleted successfully !"
+    else 
+      flash[:error] = "Task was not deleted !"
+    end 
+    redirect_to @project
   end
 
   private
@@ -22,7 +29,7 @@ class TasksController < ApplicationController
   end 
 
   def task_params
-    params.require(:task).permit(:content, :project_id => @project.id)
+    params.require(:task).permit(:content, :status, :project_id => @project.id)
   end
 
 end

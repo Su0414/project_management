@@ -1,4 +1,13 @@
+
+
 <h1>Projects Details Show Page</h1>
+
+<% if @message %>
+  <div class="center alert">
+    <p><%= @message %></p>
+  </div>
+<% end %>
+
 <p>
 <%= @project.name %>
 <%= @project.description %>

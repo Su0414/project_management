@@ -1,9 +1,16 @@
-<h1>Projects Details Page#show</h1>
+<h1>Projects Details Show Page</h1>
 <p>
 <%= @project.name %>
 <%= @project.description %>
 </p>
 
+<div id="todo_items_wrapper">
+    <%= render "tasks/task" %>
+    Create Task:
+    <div id="form">
+    <%= render "tasks/form" %>
+    </div>
+</div>
 
-Create Task:
-
+<p><%= link_to "Edit Project", edit_project_path(@project) %></p>
+<p><%= link_to "Back", projects_path(@project) %></p>

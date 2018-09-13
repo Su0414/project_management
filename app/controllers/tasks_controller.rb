@@ -1,13 +1,28 @@
 class TasksController < ApplicationController
-  def index
+  before_action :set_project
+  
+  def create  
+    @task = @project.tasks.new(task_params)
+    @task.user_id = current_user.id
+    
+    if @task.save
+      redirect_to @project
+    else 
+      render :new
+    end
   end
 
-  def show
+  def destroy
   end
 
-  def new
+  private
+
+  def set_project
+    @project = Project.find_by(id: params[:project_id])
+  end 
+
+  def task_params
+    params.require(:task).permit(:content, :project_id => @project.id)
   end
 
-  def edit
-  end
 end

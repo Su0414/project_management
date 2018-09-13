@@ -1,0 +1,12 @@
+<%= form_for ([@project, @project.tasks.build]) do |f| %>
+
+    <%= f.label :content %>
+    <%= f.text_field :content, placeholder: "New Task" %>
+    <br>
+
+    <%= f.label :status %>
+    <%= f.text_field :status, placeholder: "New Task" %>
+    <br>
+    
+<%= f.submit %>
+<% end %>

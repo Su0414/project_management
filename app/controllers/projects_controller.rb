@@ -10,12 +10,12 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def show
-    
+  def show    
   end
 
   def new
     @project = Project.new
+    @task = Task.new
   end
 
   def create 

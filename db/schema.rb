@@ -15,13 +15,14 @@ ActiveRecord::Schema.define(version: 2018_09_11_150023) do
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.string "description"
+    t.string "status"
   end
 
   create_table "tasks", force: :cascade do |t|
     t.string "content"
-    t.string "status"
     t.integer "project_id"
     t.integer "user_id"
+    t.datetime "completed_at"
   end
 
   create_table "users", force: :cascade do |t|

@@ -13,7 +13,8 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task = @project.tasks.find_by(params[:id])
+    @task = @project.tasks.find_by(id: params[:id])
+    
     if @task.delete 
       flash[:success] = "Task was deleted successfully !"
     else 

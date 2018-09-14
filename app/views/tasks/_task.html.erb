@@ -1,7 +1,7 @@
 <ul>
 <% @project.tasks.each do |t| %>
     <li><%= t.content%></li>
-    <p><%= link_to "Edit Task", edit_project_task_path(@project, t.id) %></p>
     <p><%= link_to "Delete Task", project_task_path(@project, t.id) , method:"delete",  data: { confirm: "You want to delete this task?" } %></p>
+
     <% end %>
     </ul>

@@ -1,7 +1,28 @@
 <ul>
-<% @project.tasks.each do |t| %>
-    <li><%= t.content%></li>
-    <p><%= link_to "Delete Task", project_task_path(@project, t.id) , method:"delete",  data: { confirm: "You want to delete this task?" } %></p>
-
+<% @project.tasks.each do |t| %>   
+        <% if t.completed? %>            
+            <div class="task">
+                    <strike><li><%= t.content%></li></strike>
+            </div>
+            <div class="complete">
+                <p><%= link_to "Mark as Completed", complete_project_task_path(@project, t.id) , method:"patch" %></p>
+            </div>
+            <div class="trash">
+                <p><%= link_to "Delete Task", project_task_path(@project, t.id) , method:"delete",  data: { confirm: "You want to delete this task?" } %></p>
+            </div>
+        <% else %>        
+            <div class="task">
+            <li><%= t.content%></li>
+            </div>
+            <div class="complete">
+                <p><%= link_to "Mark as Completed", complete_project_task_path(@project, t.id) , method:"patch" %></p>
+            </div>
+            <div class="trash">
+                <p><%= link_to "Delete Task", project_task_path(@project, t.id) , method:"delete",  data: { confirm: "You want to delete this task?" } %></p>
+            </div>
+        <% end %>
     <% end %>
     </ul>
+
+
+    

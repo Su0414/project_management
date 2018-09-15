@@ -1,5 +1,5 @@
 <%= form_for @project do |f| %>
-
+    
     <%= f.label :name %>
     <%= f.text_field :name %>
     <br>
@@ -9,9 +9,14 @@
     <%= f.text_field :description %>
 
     <br>
-    <%= f.hidden_field :status, :value => "active" %>
+    <%= f.label :status %>
+    <%= f.radio_button :status, "active"%>
+    <%= f.label :status_active, "Active" %>
 
     
+    <%= f.radio_button :status, "deactive" %>
+    <%= f.label :status_inactive, "Deactive" %>
 
 <%= f.submit class: "btn btn-primary" %>
 <% end %>
+

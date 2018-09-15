@@ -27,12 +27,12 @@
         <td><%= project.description %></td>
         <% if current_user.admin %>
           <td>
-            <%= link_to "Show #{project.name}", project_path(project) %>
-            <%= link_to "Edit #{project.name}", [:edit, project] %>
-            <%= link_to "Delete #{project.name}" %>
+            <%= link_to "Show", project_path(project) %>
+            <%= link_to "Edit", [:edit, project] %>
+            <%= link_to "Delete" %>
           </td>
         <% else %>
-          <td><%= link_to "Show Tasks #{project.name}", project_path(project) %></td>
+          <td><%= link_to "Show Tasks", project_path(project) %></td>
         <% end %>
       </tr>
     <% end %>

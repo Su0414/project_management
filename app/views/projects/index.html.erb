@@ -1,7 +1,6 @@
 <h1>Projects Dashboard</h1>
-<p>Current Active Projects for </p>
 
-<h1>List of Active Projects</h1>
+<h1>List Of Projects</h1>
  <table class="table">
   <thead>
     <tr>
@@ -16,17 +15,29 @@
     </tr>
     <% @projects.each do |project| %>
       <tr>
-         <td><%= project.name %></td>
-        <td><%= project.description %></td>
-        <% if current_user.admin %>
-          <td>
-            <%= link_to "Show", project_path(project) %>
-            <%= link_to "Edit", [:edit, project] %>
-            <%= link_to "Delete" %>
-          </td>
-        <% else %>
-          <td><%= link_to "Show Tasks", project_path(project) %></td>
-        <% end %>
+          <% if project.status == "active" %>
+              <td><%= project.name %></td>
+              <td><%= project.description %></td>
+          <% else %>
+              <td>
+              <strike><%= project.name %></strike>
+              </td>
+              <td>
+              <strike><%= project.description %></strike>
+              </td>
+          <% end %>
+
+              <% if current_user.admin %>
+                <td>
+                
+                  <%= link_to "Show", project_path(project) %>
+                  <%= link_to "Edit", [:edit, project] %>
+                  <%= link_to "Delete" %>
+                </td>
+              <% else %>
+                <td><%= link_to "Show Tasks", project_path(project) %></td>
+              <% end %>
+          
       </tr>
     <% end %>
   </tbody>

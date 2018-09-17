@@ -16,6 +16,8 @@ ActiveRecord::Schema.define(version: 2018_09_11_150023) do
     t.string "name"
     t.string "description"
     t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -23,6 +25,8 @@ ActiveRecord::Schema.define(version: 2018_09_11_150023) do
     t.integer "project_id"
     t.integer "user_id"
     t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -31,6 +35,8 @@ ActiveRecord::Schema.define(version: 2018_09_11_150023) do
     t.string "email"
     t.string "password_digest"
     t.boolean "admin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

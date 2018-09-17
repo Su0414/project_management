@@ -2,24 +2,24 @@
 
 <h1>Projects Details Show Page</h1>
 
-<% if @message %>
-  <div class="center alert">
-    <p><%= @message %></p>
-  </div>
-<% end %>
-
 <p>
 <%= @project.name %>
 <%= @project.description %>
 </p>
 
-<div id="todo_items_wrapper">
-    <%= render "tasks/task" %>
-    Create Task:
-    <div id="form">
-    <%= render "tasks/form" %>
-    </div>
-</div>
+  <div id="todo_items_wrapper">
+      <%= render "tasks/task" %>
+      <% if @project.status == "active" %>
+        Create Task:
+          <div id="form">
+          <%= render "tasks/form" %>
+          </div>        
 
-<p><%= link_to "Edit Project", edit_project_path(@project) %></p>
+      <% end %>
+  </div>
+
+
+<% if current_user.admin %>            
+  <p><%= link_to "Edit Project", edit_project_path(@project) %></p>
+<% end %>
 <p><%= link_to "Back", projects_path%></p>

@@ -1,3 +1,4 @@
+
 class User < ActiveRecord::Base
     validates :first_name, presence: true, length: { minimum: 3 }
     validates :last_name, presence: true, length: { minimum: 2 }
@@ -13,13 +14,10 @@ class User < ActiveRecord::Base
     has_many :projects, through: :tasks
 
 
-    def self.find_or_create_by_omniauth(auth_hash)
-      self.where(:email => auth_hash["info"]["email"]).first_or_create do |user|
-        user.password = SecureRandom.hex
-        user.first_name = auth_hash["info"]["name"]
-        # user.provider = auth_hash["provider"]
-        user.id = auth_hash["uid"]
-      end 
-    end
+    # def self.find_or_create_by_omniauth(auth_hash)
+    #   self.where(:email => auth_hash["info"]["email"]).first_or_create do |user|
+    #     user.password = SecureRandom.hex       
+    #   end 
+    # end
     
   end

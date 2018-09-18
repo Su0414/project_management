@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   delete '/signout', to: 'sessions#destroy'
 
-  get 'users/auth/github/callback' => 'sessions#create'
+  get '/auth/github/callback' => 'sessions#create'
   
   resources :users
   

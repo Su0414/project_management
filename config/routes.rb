@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   post '/signin', to: 'sessions#create'
 
   delete '/signout', to: 'sessions#destroy'
+
+  get 'users/auth/github/callback' => 'sessions#create'
   
   resources :users
   

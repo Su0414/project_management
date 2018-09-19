@@ -1,28 +1,29 @@
 
-
-<h1>Projects Details Show Page</h1>
+<h1 class="todo_list_title">
+    <%= @project.name %>
+</h1>    
+    <h2 class="todo_list_sub_title">  
+        <%= @project.description %>
+    </h2>
     <% if flash[:notice] %>
         <div class="notice"><%= flash[:notice] %></div>
     <% end %>
-
-<p>
-<%= @project.name %>
-<%= @project.description %>
-</p>
-
-  <div id="todo_items_wrapper">
-      <%= render "tasks/task" %>
+    <div class="index_row clearfix">
+      <%= render "tasks/task" %>    
       <% if @project.status == "active" %>
         Create Task:
-          <div id="form">
-          <%= render "tasks/form" %>
-          </div>              
-
-      <% end %>
+          <div class="forms">
+            <%= render "tasks/form" %>
+          </div>
+          <% end %>
+      
+  
   </div>
 
+  <div class="links">
 
-<% if current_user.admin %>            
-  <p><%= link_to "Edit Project", edit_project_path(@project) %></p>
-<% end %>
-<p><%= link_to "Back", projects_path%></p>
+        <% if current_user.admin %>            
+        <p><%= link_to "Edit Project", edit_project_path(@project) %></p>
+        <% end %>
+    <%= link_to "Back", projects_path%>
+</div>

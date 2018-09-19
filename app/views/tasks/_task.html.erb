@@ -1,39 +1,21 @@
-<ul>
 <% @project.tasks.each do |t| %> 
-    <p>Task Assigned To:
-    <%= t.user.first_name %>  
-    </p>
-    
-        <% if t.completed?  %>            
-            <div class="task">
-                <p style="opacity: 0.4;">
-                <strike>
-                    <li><%= t.content%></li>
-                </strike>
-                </p>
-            </div>          
-        <% else %>        
-            <div class="task">
-            <li><%= t.content%></li>
-            </div>
+    Task Assigned To:<%= t.user.first_name %> <br/>
+        <% if t.completed? %>    
+            <strike><%= t.content%></strike>                 
+        <% else %>           
+            <%= t.content%>          
         <% end %>
-
-       
-
-        <% if @project.status == "active" && current_user == t.user %>
-            <div class="complete">
-            <% if !t.completed?  %>    
-               <p><%= link_to "Mark as Completed", complete_project_task_path(@project, t.id) , method:"patch" %></p>
-            <% end %>                
-            </div>
-
-            <div class="trash">
-                <p><%= link_to "Delete Task", project_task_path(@project, t.id) , method:"delete",  data: { confirm: "Are you sure, you want to delete this task?" } %></p>
-            </div>
-        <% end %>               
-
-    <% end %>
-    </ul>
-
-
     
+        <div class="links">         
+            <% if @project.status == "active" && current_user == t.user %>            
+                <% if !t.completed?  %>    
+                    <%= link_to "Mark as Completed", complete_project_task_path(@project, t.id) , method:"patch" %>
+                <% end %>            
+                    <%= link_to "Delete Task", project_task_path(@project, t.id) , method:"delete",  data: { confirm: "Are you sure, you want to delete this task?" } %>
+            <% end %>       
+        </div>              
+    <% end %>
+    
+
+
+ 

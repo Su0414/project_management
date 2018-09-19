@@ -1,8 +1,5 @@
 <%= form_for ([@project, @project.tasks.build]) do |f| %>
-
     <%= f.label :content %>
     <%= f.text_field :content, placeholder: "New Task" %>
-    <br>    
-    
-<%= f.submit class: "btn btn-primary" %>
+    <%= f.submit class: "btn btn-primary" %>
 <% end %>

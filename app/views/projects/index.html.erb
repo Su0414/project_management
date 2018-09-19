@@ -1,48 +1,52 @@
 <h1>Projects Dashboard</h1>
-
 <h1>List Of Projects</h1>
- <table class="table">
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-   <tbody>
-    <tr>
-      <td><strong>Name</strong></td>
-      <td><strong>Description</strong></td>
-      <td><strong>Details</strong></td>
-    </tr>
-    <% @projects.each do |project| %>
-      <tr>
-          <% if project.status == "active" %>
-              <td><%= project.name %></td>
-              <td><%= project.description %></td>
-          <% else %>
-              <td>
-              <strike><%= project.name %></strike>
-              </td>
-              <td>
-              <strike><%= project.description %></strike>
-              </td>
-          <% end %>
 
-              <% if current_user.admin %>
-                <td>
-                
-                  <%= link_to "Show", project_path(project) %>
-                  <%= link_to "Edit", [:edit, project] %>
-                  <%= link_to "Delete" %>
-                </td>
-              <% else %>
-                <td><%= link_to "Show Tasks", project_path(project) %></td>
-              <% end %>
-          
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<br>
- <% if current_user.admin %>  
-  <p><%= link_to 'New Project', new_project_path %></p>  
+<% @projects.each do |project| %>
+  <div class="index_row clearfix">
+  <% if project.status == "active" %>
+    <h2 class="todo_list_title">
+      <%= link_to project.name, project_path(project) %>  
+    </h2>
+    
+    <h2 class="todo_list_sub_title">      
+      <%= project.description %>         
+    </h2>
+    
+    <br/> 
+
+    <% if current_user.admin %>
+    <div class="links">
+      <%= link_to "Edit", [:edit, project] %>
+      <%= link_to "Delete" %>    
+    </div>
+    <% else %>
+      <div class="links">
+        <%= link_to "Show Tasks", project_path(project) %>
+      </div>
+    <% end %>     
+
+  <% else %>
+      <h2 class="todo_list_title">
+        <strike><%= link_to project.name, project_path(project) %>  </strike>
+      </h2>
+            
+      <h2 class="todo_list_sub_title">
+        <strike><%= project.description %>  </strike>
+      </h2>
+      <div class="links">
+        <%= link_to "Edit", [:edit, project] %>
+        <%= link_to "Delete" %>    
+      </div>
+  <% end %>
+
+  </div>
+
+  
 <% end %>
+
+<div class="links">
+  <% if current_user.admin %>  
+      <p><%= link_to 'New Project', new_project_path %></p>  
+  <% end %>
+</div>
+

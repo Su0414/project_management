@@ -22,8 +22,10 @@ class ProjectsController < ApplicationController
   def create 
     @project = Project.new(project_params)
     if @project.save
+      flash[:notice] = "Successfully created Project."
       redirect_to @project
     else 
+      flash[:notice] = "Un-Successfully created Project."
       render :new
     end
   end
@@ -31,11 +33,12 @@ class ProjectsController < ApplicationController
   def edit
   end
 
-  def update 
-    
+  def update     
     if @project.update(project_params)
+      flash[:notice] = "Successfully updated project."
       redirect_to @project
     else 
+      flash[:notice] = "Un-Successfully updated project."
       render :edit
     end
   end

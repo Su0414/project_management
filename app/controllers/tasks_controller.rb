@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+
   before_action :set_project
   before_action :set_task, only: [:destroy, :complete]
   
@@ -7,26 +8,28 @@ class TasksController < ApplicationController
     @task.user_id = current_user.id
     
     if @task.save
+      flash[:notice] = "Successfully created task."
       redirect_to @project
     else 
-      render :new
+      flash[:notice] = "Ooopss ...Task was not created.Check if this task already exists or content can not be blank"
+      redirect_to @project
     end
   end
 
   def destroy  
     if @task.delete 
-      flash[:success] = "Task was deleted successfully !"
+      flash[:notice] = "Task was deleted successfully !"
     else 
-      flash[:error] = "Task was not deleted !"
+      flash[:notice] = "Task was not deleted !"
     end 
     redirect_to @project
   end
 
   def complete     
     if @task.update_attribute(:completed_at, Time.now)      
-      flash[:success] = "Congrats ! Task was completed successfully !"
+      flash[:notice] = "Congrats ! Task was completed successfully !"
     else
-      flash[:error] = "Ooopps there was some error !"
+      flash[:notice] = "Ooopps there was some error !"
     end 
     redirect_to @project
   end 

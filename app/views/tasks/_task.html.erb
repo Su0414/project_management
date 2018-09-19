@@ -1,9 +1,16 @@
 <ul>
 <% @project.tasks.each do |t| %> 
+    <p>Task Assigned To:
+    <%= t.user.first_name %>  
+    </p>
     
         <% if t.completed?  %>            
             <div class="task">
-                    <strike><li><%= t.content%></li></strike>
+                <p style="opacity: 0.4;">
+                <strike>
+                    <li><%= t.content%></li>
+                </strike>
+                </p>
             </div>          
         <% else %>        
             <div class="task">
@@ -11,8 +18,7 @@
             </div>
         <% end %>
 
-        Task Assigned To:
-            <%= t.user.first_name %>  
+       
 
         <% if @project.status == "active" && current_user == t.user %>
             <div class="complete">
@@ -22,7 +28,7 @@
             </div>
 
             <div class="trash">
-                <p><%= link_to "Delete Task", project_task_path(@project, t.id) , method:"delete",  data: { confirm: "You want to delete this task?" } %></p>
+                <p><%= link_to "Delete Task", project_task_path(@project, t.id) , method:"delete",  data: { confirm: "Are you sure, you want to delete this task?" } %></p>
             </div>
         <% end %>               
 

@@ -1,4 +1,4 @@
-class ProjectsController < ApplicationController
+class ProjectsController < ApplicationController  
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   def index    
@@ -42,6 +42,20 @@ class ProjectsController < ApplicationController
       render :edit
     end
   end
+
+  def destroy     
+    if @project.delete
+         @tasks = Task.where(:project_id => @project.id)
+         
+         if @tasks.delete_all
+          flash[:notice] = "Successfully deleted this Project !! All tasks for this Project were also deleted !!"
+          redirect_to @project
+         end
+     else
+         flash[:notice] = "This Project was not deleted !!"         
+         redirect_to projects_path
+     end
+  end 
 
 
   private

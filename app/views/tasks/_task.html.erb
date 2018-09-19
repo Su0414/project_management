@@ -8,18 +8,22 @@ end
     Task Assigned To:<%= t.user.first_name %>    
                 
             <% if current_user == t.user %>            
-                <% if !t.completed?  %>                    
-                    <%= link_to complete_project_task_path(@project, t.id) , method:"patch" do %>
-                        <i class="fa fa-check"></i> 
-                    <% end %> 
+                <% if !t.completed?  %> 
+                    <% if @project.status == "active"  %> 
+                        <%= link_to complete_project_task_path(@project, t.id) , method:"patch" do %>
+                            <i class="fa fa-check"></i> 
+                        <% end %> 
+                    <% end %>
                     <%= t.content %>   
                 <% else %>                      
                         <i style="opacity:0.4;" class="fa fa-check"></i>   
                         <strike><%= t.content%></strike> 
                 <% end %>  
+                <% if @project.status == "active"  %> 
                     <%= link_to  project_task_path(@project, t.id) , method:"delete",  data: { confirm: "Are you sure, you want to delete this task?" } do %>
                     <i class="fa fa-trash"></i> 
                     <% end %>
+                <% end %>
                     
             <% end %>       
           </div>       

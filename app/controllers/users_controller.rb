@@ -8,9 +8,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      flash[:notice] = "Successfully created User."
       session[:user_id] = @user.id
       redirect_to user_path(@user)
     else
+      flash[:notice] = "Un-Successfully created User."
       render :new
     end
 
@@ -23,8 +25,6 @@ class UsersController < ApplicationController
         redirect_to root_path
       end
     end
-    @message = params[:message] if params[:message]
-    @message ||= false
   end
 
   def edit
@@ -32,8 +32,10 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
+      flash[:notice] = "Successfully updated User Profile."
       redirect_to @user
     else
+      flash[:notice] = "Un-Successfully updated User Profile."
       render :edit
     end
   end

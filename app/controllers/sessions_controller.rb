@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   end
 
   def create     
-    if request.env["omniauth.auth"]
+    if request.env["omniauth.auth"]      
       @user = User.from_omniauth(request.env["omniauth.auth"])
       
         session[:user_id] = @user.id
@@ -25,6 +25,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
+    flash[:notice] = "Successfully logged out!."
     redirect_to root_url
   end
 

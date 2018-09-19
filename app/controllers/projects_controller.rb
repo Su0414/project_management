@@ -1,12 +1,13 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
-  def index
-    @projects = Project.all
+  def index    
     if current_user.admin
-      @users = User.where(admin: false)      
+      @users = User.where(admin: false)  
+      @projects = Project.all.recent    
     else 
       @users = User.where(id: current_user.id)
+      @projects = Project.all.status
     end
   end
 

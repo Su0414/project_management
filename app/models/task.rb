@@ -4,7 +4,10 @@ class Task < ActiveRecord::Base
     belongs_to :project
     belongs_to :user
 
-    def completed?
+    scope :pending, -> { where(completed_at: '') }
+
+
+   def completed?
       !completed_at.blank?
     end 
   end

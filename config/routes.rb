@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('application#home')
   
   
-  resources :users
+  resources :users do 
+    resources :tasks     
+  end 
   
   resources :projects do 
       resources :tasks do 
@@ -21,5 +23,4 @@ Rails.application.routes.draw do
       end
   end
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

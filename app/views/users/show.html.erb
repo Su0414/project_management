@@ -1,12 +1,28 @@
-<% if @user.admin %>
-<p>Owner</p>
-<% end %>
-Name:
+
+
 Welcome ! <%= @user.first_name %> <%= @user.last_name %>
 
-Email:
-<%= @user.email %>
+<% if @user.admin %>
+<p>You are Owner</p>
+<% end %>
+<p><%= link_to 'Edit Profile', edit_user_path(@user) %></p>
 
-<p><%= link_to 'Edit', edit_user_path(@user) %></p>
+<%
+   if @user.tasks.size == 0 
+    flash[:notice] = "You have no pending tasks...."
+   end 
+%>
 
-<%= link_to 'Projects Dashboard', projects_path %>
+<h2 class="todo_list_title"><%= @user.first_name %>'s Tasks List</h2>
+You have some pending tasks to take care of.......
+<% @user.tasks.each do |t| %>
+    
+        <% if !t.completed?  %>
+        <div class="index_row clearfix">
+        
+        
+            <%= link_to t.content, project_path(t.project_id) %> 
+        </div>
+        <% end %>
+   
+<% end %>

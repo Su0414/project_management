@@ -6,54 +6,55 @@
     flash[:notice] = "You have no acitve projects assigned...."
   end 
 %>
-
-
 <% @projects.each do |project| %>
+  
   <div class="index_row clearfix">
-  <% if project.status == "active" %>
-    <h2 class="todo_list_title">
-      <%= link_to project.name, project_path(project) %>  
-    </h2>
-    
-    <h2 class="todo_list_sub_title">      
-      <%= project.description %>         
-    </h2>
-    
-    <br/> 
 
-    <% if current_user.admin %>
-    <div class="links">
-      <%= link_to "Edit", [:edit, project] %>
-      <%=   link_to project_path(project), method: :delete, data: { confirm: 'Are you sure you want to delete this Project? All project tasks shall also be deleted.' } do %> 
-        
-        <i class="fa fa-trash"></i>   
-      <% end %>   
-    </div>
-    <% else %>
-      <div class="links">
-        <%= link_to "Show Tasks", project_path(project) %>
-      </div>
-    <% end %>     
-
-  <% else %>
+    <% if project.status == "active" %>
       <h2 class="todo_list_title">
-        <strike><%= link_to project.name, project_path(project) %>  </strike>
+        <%= link_to project.name, project_path(project) %>  
       </h2>
-            
-      <h2 class="todo_list_sub_title">
-        <strike><%= project.description %>  </strike>
+      
+      <h2 class="todo_list_sub_title">      
+        <%= project.description %>         
       </h2>
+      
+      <br/> 
+
+      <% if current_user.admin %>
       <div class="links">
-        <%= link_to "Edit", [:edit, project] %>
+        <%= link_to "Edit Project", [:edit, project] %>
         <%=   link_to project_path(project), method: :delete, data: { confirm: 'Are you sure you want to delete this Project? All project tasks shall also be deleted.' } do %> 
-        
+          
           <i class="fa fa-trash"></i>   
-        <% end %>
+        <% end %>   
       </div>
+      <% else %>
+        <div class="links">
+          <%= link_to "Show Tasks", project_path(project) %>
+        </div>
+      <% end %>     
+
+    <% else %>
+        <h2 class="todo_list_title">
+          <strike><%= link_to project.name, project_path(project) %>  </strike>
+        </h2>
+              
+        <h2 class="todo_list_sub_title">
+          <strike><%= project.description %>  </strike>
+        </h2>
+        <div class="links">
+          <%= link_to "Edit", [:edit, project] %>
+          <%=   link_to project_path(project), method: :delete, data: { confirm: 'Are you sure you want to delete this Project? All project tasks shall also be deleted.' } do %> 
+          
+            <i class="fa fa-trash"></i>   
+          <% end %>
+        </div>
+      
   <% end %>
 
+  
   </div>
-
   
 <% end %>
 

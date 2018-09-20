@@ -2,6 +2,11 @@
 <% if flash[:notice] %>
 <div id="notice"><%= flash[:notice] %></div>
 <% end %>
+<% if @projects.size == 0
+    flash[:notice] = "You have no acitve projects assigned...."
+  end 
+%>
+
 
 <% @projects.each do |project| %>
   <div class="index_row clearfix">

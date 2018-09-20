@@ -1,5 +1,7 @@
 
 class SessionsController < ApplicationController
+  before_action :authenticate_user, only: [:destroy]
+
   def sign_in
     @user = User.new
     @users = User.all
@@ -7,11 +9,9 @@ class SessionsController < ApplicationController
 
   def create     
     if request.env["omniauth.auth"]      
-      @user = User.from_omniauth(request.env["omniauth.auth"])
-      
+      @user = User.from_omniauth(request.env["omniauth.auth"])        
         session[:user_id] = @user.id
-        redirect_to user_path(@user)
-    
+        redirect_to user_path(@user)    
      else # if not through social , its regular
         @user = User.find_by(email: params[:user][:email])
         if @user && @user.authenticate(params[:user][:password])
@@ -25,7 +25,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    flash[:notice] = "Successfully logged out!."
     redirect_to root_url
   end
 

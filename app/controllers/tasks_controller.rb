@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :authenticate_user
   before_action :set_project, except: [:index]
   before_action :set_task, only: [:destroy, :complete]
-  
+
   def create  
     @task = @project.tasks.new(task_params)
     @task.user_id = current_user.id
@@ -17,8 +17,8 @@ class TasksController < ApplicationController
   end
 
   def index    
-    @user = User.find_by(id: params[:id])
-   
+    @user = User.find_by(id: params[:user_id])    
+    render :index
   end 
 
   def destroy  

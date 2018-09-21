@@ -2,28 +2,30 @@
     No Tasks are pending
 <% else %>
     You have some pending tasks to take care of............
-       
+
         <% c1 = @user.tasks.collect { |p| p.project }          
 
         %>
         <% c1.uniq.each do |project| %>
             
-            <%if project.status == "active" && current_user %>
-            <h4 class="todo_list_title">
-                <%= link_to project.name, project_path(project) %>
-            </h4>
-                <% project.tasks.each do |t|%>
-                    
+            <% if project.status == "active" %>
+                <h4 class="todo_list_title">
+                    <%= link_to project.name, project_path(project) %>
+                </h4>
+                    <% project.tasks.each do |t|%>
+                        <%if current_user == t.user %>
+
                             <div class="index_row clearfix">   
-                        <% if !t.completed?  %>               
-                            
-                                <%= link_to t.content, project_path(project) %> 
-                            
-                        <% else %> 
-                            <strike><%= t.content%></strike> 
-                        <% end %> 
-                        </div>
-                <% end %>
+                            <% if !t.completed?  %>               
+                                
+                                    <%= link_to t.content, project_path(project) %> 
+                                
+                            <% else %> 
+                                <strike><%= t.content%></strike> 
+                            <% end %> 
+                            </div>
+                        <% end %>
+                    <% end %>
             <% end %>
         <% end %>        
     

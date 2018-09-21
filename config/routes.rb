@@ -4,7 +4,6 @@ Rails.application.routes.draw do
 
   get '/signin', to: 'sessions#sign_in'
   post '/signin', to: 'sessions#create'
-
   delete '/signout', to: 'sessions#destroy'
 
   get 'auth/:provider/callback', to: 'sessions#create'
@@ -12,7 +11,7 @@ Rails.application.routes.draw do
   
   
   resources :users do 
-    resources :tasks     
+      resources :tasks, only: [:index]         
   end 
   
   resources :projects do 

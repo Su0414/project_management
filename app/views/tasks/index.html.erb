@@ -1,0 +1,12 @@
+<% @user.tasks.each do |t| %>
+    <div class="index_row clearfix">   
+    <% if !t.completed?  %>
+        
+        
+            <%= link_to t.content, project_path(t.project_id) %> 
+        
+    <% else %> 
+        <strike><%= t.content%></strike> 
+    <% end %> 
+    </div>
+<% end %>

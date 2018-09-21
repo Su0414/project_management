@@ -7,21 +7,22 @@ Welcome ! <%= @user.first_name %> <%= @user.last_name %>
 <% end %>
 <p><%= link_to 'Edit Profile', edit_user_path(@user) %></p>
 
-
-
 <h2 class="todo_list_title"><%= @user.first_name %>'s Tasks List</h2>
 <% if @user.tasks.pending.size == 0 %>
     No Tasks are pending
 <% else %>
     You have some pending tasks to take care of............
-
+    Select Project Name:
+        <% @projects.each do |p|%>
+            <%=p.name%>
+        <% end %>
 
         <% @user.tasks.pending.each do |t| %>
             <div class="index_row clearfix">   
             <% if !t.completed?  %>
                 
                 
-                    <%= link_to t.content, project_path(t.project_id) %> 
+                    <%= link_to t.content, user_tasks_path(t.project_id) %> 
                 
             <% else %> 
                 <strike><%= t.content%></strike> 

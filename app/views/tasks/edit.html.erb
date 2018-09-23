@@ -1,0 +1,16 @@
+<h2 class="todo_list_title">
+<%= @project.name %>
+</h2>
+<div class="forms">
+        <%= form_for ([@project, @task]) do |f| %>
+
+            <%= f.label :content %>
+            <%= f.text_field :content %>
+
+            <%= f.submit class: "btn btn-primary" %>
+        <% end %>
+</div>
+
+<div class="links">
+    <%= link_to "Cancel", projects_path%>
+</div>

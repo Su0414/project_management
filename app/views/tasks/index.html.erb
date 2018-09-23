@@ -18,7 +18,7 @@
                             <div class="index_row clearfix">   
                             <% if !t.completed?  %>               
                                 
-                                    <%= link_to t.content, project_path(project) %> 
+                                    <%= link_to t.content, edit_project_task_path(project.id, t.id) %> 
                                 
                             <% else %> 
                                 <strike><%= t.content%></strike> 

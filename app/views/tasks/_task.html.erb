@@ -12,7 +12,7 @@ end
                                 <i style="opacity:0.4;" class="fa fa-check"></i> 
                             </div>
                         <div class="task">                              
-                            <strike><%= t.content%></strike> 
+                            <strike><%= t.content %></strike> 
                         </div>
                         <div class="trash">
                             <%= link_to  project_task_path(@project, t.id) , method:"delete",  data: { confirm: "Are you sure, you want to delete this task?" } do %>
@@ -27,7 +27,7 @@ end
                             </div>
                             
                             <div class="task">
-                                <%= t.content %>
+                            <%= link_to t.content, edit_project_task_path(@project.id, t.id)%>
                             </div>
 
                             <div class="trash">

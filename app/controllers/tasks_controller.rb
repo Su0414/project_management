@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :authenticate_user
   before_action :set_project, except: [:index]
-  before_action :set_task, only: [:destroy, :complete]
+  before_action :set_task, only: [:destroy, :complete, :edit, :update]
 
   def create  
     @task = @project.tasks.new(task_params)
@@ -37,6 +37,19 @@ class TasksController < ApplicationController
       flash[:notice] = "Ooopps there was some error !"
     end 
     redirect_to @project
+  end 
+
+  def edit 
+  end 
+
+  def update 
+    if @task.update(task_params)
+      flash[:notice] = "Successfully updated task."
+      redirect_to @project
+    else 
+      flash[:notice] = "Un-Successfully updated task."
+      render :edit
+    end
   end 
 
   private

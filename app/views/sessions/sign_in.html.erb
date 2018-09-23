@@ -1,4 +1,19 @@
-<div class="forms">
+ <div class="forms">
+
+ <% if flash[:notice] %>
+<div id="notice">
+    <%= flash[:notice] %>
+</div>
+<% end %> 
+
+<div class="error_message">
+    <% if @user.errors.messages.size != 0 %>
+        <% @user.errors.messages.each do |error| %>
+            <%= error %><br/>
+            <% end %>
+    <% end %>
+</div>  
+
 <%= form_for @user, url: signin_path(@user) do |f| %>
     <%= f.label :email %>
     <%= f.text_field :email %>

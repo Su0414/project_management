@@ -44,7 +44,7 @@
           <strike><%= project.description %>  </strike>
         </h2>
         <div class="links">
-          <%= link_to "Edit", [:edit, project] %>
+          <%= link_to "Edit Project", [:edit, project] %>
           <%=   link_to project_path(project), method: :delete, data: { confirm: 'Are you sure you want to delete this Project? All project tasks shall also be deleted.' } do %> 
           
             <i class="fa fa-trash"></i>   

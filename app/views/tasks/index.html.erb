@@ -1,7 +1,7 @@
 <% if @user.tasks.pending.size == 0 %>
-    No Tasks are pending
+    You have completed all tasks. No Tasks are pending
 <% else %>
-    You have some pending tasks to take care of............
+
 
         <% c1 = @user.tasks.collect { |p| p.project }          
 
@@ -9,9 +9,11 @@
         <% c1.uniq.each do |project| %>
             
             <% if project.status == "active" %>
+            
                 <h4 class="todo_list_title">
                     <%= link_to project.name, project_path(project) %>
                 </h4>
+                You have some pending tasks to take care of.........
                     <% project.tasks.each do |t|%>
                         <%if current_user == t.user %>
 

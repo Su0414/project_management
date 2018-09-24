@@ -1,4 +1,4 @@
-<% if @user.tasks.pending.size == 0 %>
+<% if @user && @user.tasks.pending.size == 0  %>
     You have completed all tasks. No Tasks are pending
 <% else %>
 

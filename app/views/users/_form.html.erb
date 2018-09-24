@@ -1,8 +1,11 @@
  
+<h5 class="todo_list_title">
+        User Sign Up
+<h5>
 <% if flash[:notice] %>
-<div id="notice">
-    <%= flash[:notice] %>
-</div>
+    <div id="notice">
+        <%= flash[:notice] %>
+    </div>
 <% end %> 
 
 <div class="error_message">
@@ -31,10 +34,10 @@
     <br>
     <br>
 
-    <%= f.label :admin, "Check box if you are company owner" %>
+    <%= f.label :admin, "Check box if you are admin" %>
     <%= f.check_box :admin %>
     <br>
     <br>
     <%= f.submit class: "btn btn-primary" %>
-   <% end %>
+<% end %>
 

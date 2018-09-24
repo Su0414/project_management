@@ -4,7 +4,7 @@ Welcome ! <br/>
 <%= @user.first_name %> <%= @user.last_name %>
 
 <p>
-<%= link_to "Edit Profile", edit_user_path(@user) %>
+    <%= link_to "Edit Profile", edit_user_path(@user) %>
 </p>
 
 <% if @user.admin %>

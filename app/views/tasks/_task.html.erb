@@ -1,11 +1,10 @@
-<% 
-if @project.tasks.size == 0 
+<% if @project.tasks.size == 0 
     flash[:notice] = "You have no tasks assigned...."
-end 
-@project.tasks.each do |t| %>  
+    end 
+    @project.tasks.each do |t| %>  
         
     <div class="index_row clearfix">
-    Task Assigned To:<%= t.user.first_name %>
+        Task Assigned To:<%= t.user.first_name %>
                 <% if @project.status=="active" && current_user == t.user  %>                   
                     <% if t.completed?  %>
                             <div class="complete">

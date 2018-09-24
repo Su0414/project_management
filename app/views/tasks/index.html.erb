@@ -1,36 +1,27 @@
 <% if @user && @user.tasks.pending.size == 0  %>
     You have completed all tasks. No Tasks are pending
 <% else %>
+    <% c1 = @user.tasks.collect { |p| p.project } %>
+    <% c1.uniq.each do |project| %>
+        
+        <% if project.status == "active" %>
+        
+            <h4 class="todo_list_title">
+                <%= link_to project.name, project_path(project) %>
+            </h4>
+            You have some pending tasks to take care of.........
+                <% project.tasks.each do |t|%>
+                    <%if current_user == t.user %>
 
-
-        <% c1 = @user.tasks.collect { |p| p.project }          
-
-        %>
-        <% c1.uniq.each do |project| %>
-            
-            <% if project.status == "active" %>
-            
-                <h4 class="todo_list_title">
-                    <%= link_to project.name, project_path(project) %>
-                </h4>
-                You have some pending tasks to take care of.........
-                    <% project.tasks.each do |t|%>
-                        <%if current_user == t.user %>
-
-                            <div class="index_row clearfix">   
-                            <% if !t.completed?  %>               
-                                
-                                    <%= link_to t.content, edit_project_task_path(project.id, t.id) %> 
-                                
-                            <% else %> 
-                                <strike><%= t.content%></strike> 
-                            <% end %> 
-                            </div>
-                        <% end %>
+                        <div class="index_row clearfix">   
+                        <% if !t.completed?  %>                            
+                                <%= link_to t.content, edit_project_task_path(project.id, t.id) %>                             
+                        <% else %> 
+                            <strike><%= t.content%></strike> 
+                        <% end %> 
+                        </div>
                     <% end %>
-            <% end %>
-        <% end %>        
-    
-
-       
+                <% end %>
+        <% end %>
+    <% end %>          
 <% end %>

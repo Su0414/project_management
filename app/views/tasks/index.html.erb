@@ -10,7 +10,7 @@
                 <%= link_to project.name, project_path(project) %>
             </h4>
             You have some pending tasks to take care of.........
-                <% project.tasks.each do |t|%>
+                <% project.tasks.recent.each do |t|%>
                     <%if current_user == t.user %>
 
                         <div class="index_row clearfix">   

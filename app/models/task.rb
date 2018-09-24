@@ -5,7 +5,7 @@ class Task < ActiveRecord::Base
     belongs_to :user
 
     scope :pending, -> { where(completed_at: '') }
-
+    scope :recent, -> { order('tasks.updated_at DESC') }
 
    def completed?
       !completed_at.blank?

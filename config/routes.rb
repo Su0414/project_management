@@ -13,12 +13,18 @@ Rails.application.routes.draw do
   resources :users do 
       resources :tasks, only: [:index]          
   end 
-  
+
+  resources :projects  do 
+    member do          
+      get :completed
+    end   
+  end 
+
   resources :projects  do 
       resources :tasks, only: [:create, :edit, :update, :destroy ]  do 
-        member do 
+        member do          
           patch :complete
-        end 
+        end         
       end
   end
 

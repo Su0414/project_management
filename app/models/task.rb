@@ -7,6 +7,9 @@ class Task < ActiveRecord::Base
     scope :pending, -> { where(completed_at: '') }
     scope :recent, -> { order('tasks.updated_at DESC') }
 
+    scope :completed, -> { where.not(completed_at: '') }
+
+
    def completed?
       !completed_at.blank?
     end 

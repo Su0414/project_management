@@ -1,0 +1,10 @@
+List of completed tasks for <%=@project.name %>
+<br/>
+<% if @tasks.size == 0%>
+    <p>There are no tasks completed.</p>
+<% end %>
+<ul>
+<% @tasks.each do |t| %>
+    <li><%= t.content %></li>
+<% end %>
+</ul>

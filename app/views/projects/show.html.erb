@@ -11,6 +11,9 @@
         <%= @project.description %>
     </h2>
 </p>
+<div class="links">
+    <%= link_to "Show Completed Tasks for Project", completed_project_path(@project) %>
+</div>
 
 <div id="todo_items_wrapper">
     <%= render "tasks/task" %>    
@@ -21,6 +24,7 @@
         </div>
     <% end %>
 </div>
+
 
 <div class="links">
     <% if current_user.admin %>            

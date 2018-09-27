@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController  
   before_action :authenticate_user
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :completed]
 
   def index    
     if current_user.admin
@@ -58,6 +58,10 @@ class ProjectsController < ApplicationController
      end
   end 
 
+  def completed
+    @tasks = @project.tasks.completed
+    render :"/tasks/completed"
+  end 
 
   private
   def set_project

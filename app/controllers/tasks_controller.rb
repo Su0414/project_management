@@ -18,7 +18,7 @@ class TasksController < ApplicationController
 
   def index    
     @user = User.find_by(id: params[:user_id])    
-    render :index
+    render :index, :layout => false
   end 
 
   def destroy  

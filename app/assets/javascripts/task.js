@@ -12,8 +12,8 @@ $(function(){
                 method: "GET",
                 url: this.href
               })
-                .done(function(data) {                   
-                  $("body").append(data);                
+                .done(function(response) {                   
+                  $("div.tasks").html(response);                
                 });
         });
     }

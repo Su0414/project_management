@@ -1,0 +1,10 @@
+<div class="created_task">
+<ol>
+<% @project.tasks.recent.each do |t| %>  
+<li>
+    <%=t.content%>
+</li>
+
+<% end %>
+</ol>
+</div>

@@ -10,7 +10,7 @@ class TasksController < ApplicationController
     if @task.save
       flash[:notice] = "Successfully created task."
       #redirect_to @project
-      render json: @project, status: 201
+      render json: @task, status: 201
     else 
       flash[:notice] = "Ooopss ...Task was not created.Check if this task already exists or content can not be blank"
       redirect_to @project

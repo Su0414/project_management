@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController  
   before_action :authenticate_user
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :completed]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :completed, :alltasks]
 
   def index    
     if current_user.admin
@@ -61,6 +61,14 @@ class ProjectsController < ApplicationController
   def completed
     @tasks = @project.tasks.completed
     render :"/tasks/completed"
+  end 
+
+  def alltasks  
+    @tasks = @project.tasks 
+    respond_to do |format|
+      format.html { render partial: "tasks/task", :layout => false }
+      format.json { render json: @tasks, status: 201}
+    end
   end 
 
   private

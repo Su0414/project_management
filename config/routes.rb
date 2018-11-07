@@ -21,7 +21,14 @@ Rails.application.routes.draw do
   end 
 
   resources :projects  do 
-      resources :tasks, only: [:create, :edit, :update, :destroy ]  do 
+      member do          
+        get :alltasks
+      end  
+     
+  end 
+
+  resources :projects  do 
+      resources :tasks, only: [:create, :edit, :update, :destroy]  do 
         member do          
           patch :complete
         end         

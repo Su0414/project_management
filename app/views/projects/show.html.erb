@@ -12,11 +12,13 @@
     </h2>
 </p>
 <div class="links">
-    <%= link_to "Show Completed Tasks for Project", completed_project_path(@project) %>
+    # <%= link_to "Show Completed Tasks", completed_project_path(@project) %>
+    <%= link_to "Show All Tasks", alltasks_project_path(@project), class: "project_tasks" %>
 </div>
 
-<div id="todo_items_wrapper">
-    <%= render "tasks/task" %>    
+<div id="todo_items_wrapper">  
+<div class="projecttasks">
+</div>    
     <% if @project.status == "active" %>
     Create Task:
         <div class="forms">

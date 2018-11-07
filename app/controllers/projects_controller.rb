@@ -60,7 +60,11 @@ class ProjectsController < ApplicationController
 
   def completed
     @tasks = @project.tasks.completed
-    render :"/tasks/completed"
+    # render :"/tasks/completed"
+    respond_to do |format|
+      format.html { render :"/tasks/completed", :layout => false }
+      format.json { render json: @tasks, status: 201}
+    end
   end 
 
   def alltasks  

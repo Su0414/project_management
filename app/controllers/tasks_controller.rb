@@ -34,7 +34,7 @@ class TasksController < ApplicationController
     else 
       flash[:notice] = "Task was not deleted !"
     end 
-    redirect_to @project
+    redirect_to @project    
   end
 
   def complete     

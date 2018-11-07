@@ -12,7 +12,7 @@
     </h2>
 </p>
 <div class="links">
-    # <%= link_to "Show Completed Tasks", completed_project_path(@project) %>
+    <%= link_to "Show Completed Tasks", completed_project_path(@project), class: "project_tasks"%>
     <%= link_to "Show All Tasks", alltasks_project_path(@project), class: "project_tasks" %>
 </div>
 

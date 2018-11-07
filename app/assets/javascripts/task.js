@@ -4,7 +4,8 @@ $(function(){
             e.preventDefault();       
 
             $.get(this.href)
-            .success(function(response) {                   
+            .success(function(response) {  
+                //debugger;       
             $("div.usertasks").append(response);
             });
         });  
@@ -24,11 +25,12 @@ $(function(){
                 url: this.action,
                 data: data,
                 success: function(response) {
-                    debugger;
-                    let new_task = new Task(response);
-                    // new_task.renderTasks(); 
-                    $("div.created_task").append(response); 
-                    $("#task_content").val(""); 
+                    //debugger;
+                    $("div.show_tasks").append(response);
+                    // let new_task = new Task(response);
+                    // // new_task.renderTasks(); 
+                    // $("div.created_task").append(response); 
+                    // $("#task_content").val(""); 
 
             }
             });

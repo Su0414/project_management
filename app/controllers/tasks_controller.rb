@@ -10,7 +10,10 @@ class TasksController < ApplicationController
     if @task.save
       flash[:notice] = "Successfully created task."
       #redirect_to @project
-      render json: @task, status: 201
+      respond_to do |format|
+        format.html { render partial: "task", :layout => false }
+        format.json { render json: @task, status: 201}
+      end
     else 
       flash[:notice] = "Ooopss ...Task was not created.Check if this task already exists or content can not be blank"
       redirect_to @project
@@ -19,7 +22,10 @@ class TasksController < ApplicationController
 
   def index    
     @user = User.find_by(id: params[:user_id])    
-    render :index, :layout => false
+    respond_to do |format|
+      format.html { render :index, :layout => false }
+      format.json { render json: @user, status: 201}
+    end
   end 
 
   def destroy  

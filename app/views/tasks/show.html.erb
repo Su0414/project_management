@@ -1,0 +1,53 @@
+<% t = @project.tasks.recent.first %>  
+          
+    <div class="index_row clearfix">
+        Task Assigned To:<%= t.user.first_name %>
+                <% if @project.status=="active" && current_user == t.user  %>                   
+                    <% if t.completed?  %>
+                        <div class="complete">
+                            <i style="opacity:0.4;" class="fa fa-check"></i> 
+                        </div>
+                        <div class="task">                              
+                            <strike><%= t.content %></strike> 
+                        </div>
+                        <div class="trash">
+                            <%= link_to  project_task_path(@project, t.id) , method:"delete",  data: { confirm: "Are you sure, you want to delete this task?" } do %>
+                                <i class="fa fa-trash"></i> 
+                            <% end %> 
+                        </div>       
+                    <% else %>
+                            <div class="complete">
+                                <%= link_to complete_project_task_path(@project, t.id) , method:"patch" do %>
+                                    <i class="fa fa-check"></i>                       
+                                <% end %>  
+                            </div>
+                            
+                            <div class="task">
+                            <%= link_to t.content, edit_project_task_path(@project.id, t.id)%>
+                            </div>
+
+                            <div class="trash">
+                                <%= link_to  project_task_path(@project, t.id) , method:"delete",  data: { confirm: "Are you sure, you want to delete this task?" } do %>
+                                    <i class="fa fa-trash"></i> 
+                                <% end %> 
+                            </div>   
+                            
+                    <% end %>
+                <% else %>
+                    <% if !t.completed?  %>
+                        <div class="task">
+                            <%= t.content %> 
+                        </div>
+                    <% else %> 
+                            <div class="task">
+                                <i style="opacity:0.4;" class="fa fa-check"></i>   
+                                <strike><%= t.content%></strike>
+                            </div>
+                    <% end %>     
+                <% end %>             
+
+                                           
+            </div>
+
+            
+           

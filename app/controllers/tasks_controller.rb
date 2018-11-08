@@ -11,7 +11,7 @@ class TasksController < ApplicationController
       flash[:notice] = "Successfully created task."
       #redirect_to @project
       respond_to do |format|
-        format.html { render partial: "task", :layout => false }
+        format.html { render :show, :layout => false }
         format.json { render json: @task, status: 201}
       end
     else 

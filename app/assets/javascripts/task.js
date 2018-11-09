@@ -43,7 +43,7 @@ $(function(){
             data: data,
             success: function(response) { 
                 
-                debugger;
+                //debugger;
                 let mytask = new Task(response);
                 mytask.renderTasks();
                 $("#task_content").val("");        

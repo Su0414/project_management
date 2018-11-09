@@ -23,7 +23,7 @@ class TasksController < ApplicationController
   def index    
     @user = User.find_by(id: params[:user_id])    
     respond_to do |format|
-      format.html { render :index, :layout => false }
+      # format.html { render :index, :layout => false }
       format.json { render json: @user, status: 201}
     end
   end 

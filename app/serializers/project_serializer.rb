@@ -5,7 +5,8 @@ class ProjectSerializer < ActiveModel::Serializer
     self.object.tasks.completed.map do |task|
       {
         id: task.id,
-        content: task.content      
+        content: task.content, 
+        completed_at: task.completed_at     
       }
     end 
   end
@@ -14,7 +15,8 @@ class ProjectSerializer < ActiveModel::Serializer
     self.object.tasks.map do |task|
       {
         id: task.id,
-        content: task.content      
+        content: task.content,
+        completed_at: task.completed_at      
       }
     end 
   end  

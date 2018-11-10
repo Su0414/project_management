@@ -8,16 +8,36 @@ $(function(){
             if(type === "completed"){
                 this.format_tasks = taskJSON.completed_tasks;
             }
+        }       
+        
+        renderTd(){
+            let formatTdhtml = "" ;
+            formatTdhtml += `<table>`; 
+            this.format_tasks.forEach(task => {
+            
+                formatTdhtml += `<tr><td data-id=${task.id}> `
+                if(task.completed_at!=null){
+                    formatTdhtml += `<strike>${task.content}</strike>`;
+                }else{
+                    formatTdhtml += `${task.content}`;
+                }            
+
+            
+                formatTdhtml += `</td>
+                                     <td data-id=${task.id}>
+                                     <a href=""><i class="fa fa-check"></i></a></td>
+                                     <td data-id=${task.id}><a href=""><i class="fa fa-trash"></i></a></td></tr>`
+            });
+            formatTdhtml += `</table>`
+            return formatTdhtml;
         }
        
         renderTasks(){
-            let html = "" ;
-            this.format_tasks.forEach(task => {
-            html += `<p>${task.content}</p>`;
-            });
-            
+            let html = this.renderTd();
             $("div.projecttasks").append(html);  
         };
+
+        
 
     }
         

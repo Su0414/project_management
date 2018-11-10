@@ -11,8 +11,8 @@ class TasksController < ApplicationController
       flash[:notice] = "Successfully created task."
       #redirect_to @project
       respond_to do |format|
-        format.html { render :show, :layout => false }
-        format.json { render json: @task, status: 201}
+        # format.html { render :show, :layout => false }
+        format.json { render json: @project, status: 201}
       end
     else 
       flash[:notice] = "Ooopss ...Task was not created.Check if this task already exists or content can not be blank"

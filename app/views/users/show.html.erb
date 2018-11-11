@@ -1,19 +1,14 @@
-
-
-Welcome ! <br/>
-<%= @user.first_name %> <%= @user.last_name %>
-
-<p>
-    <%= link_to "Edit Profile", edit_user_path(@user) %>
-</p>
-
+<div class="todo_list_title">
+Welcome ! <%= @user.first_name %> <%= @user.last_name %>
+</div>
 <% if @user.admin %>
     <p>You are Owner</p>
 <% end %>
-
-<h5 class="todo_list_title">
+<p>
+    <%= link_to "Edit Profile", edit_user_path(@user) %>
+</p>
+<div class="todo_list_title">
     <%= link_to "#{@user.first_name} Tasks List", user_tasks_path(@user) , class: "user_tasks"%> 
-</h5>
-
+</div>
 <div class="usertasks">
 </div>

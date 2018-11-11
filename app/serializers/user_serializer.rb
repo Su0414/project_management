@@ -1,14 +1,9 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name, :email, :admin, :user_projects
+  attributes :id, :first_name, :last_name, :email, :admin, :user_tasks
   
-  def user_projects
-    self.object.projects.map do |project|
-      {
-        id: project.id,
-        name: project.name, 
-        status: project.status,
-        user_tasks: project.tasks.collect{|task| task.slice(:id, :content)}
-      }
-    end 
-  end 
+  def user_tasks
+    object.tasks.pending.where(user_id: scope.id).order(:project_id);
+  end
+
+    
 end

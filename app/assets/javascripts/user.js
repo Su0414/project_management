@@ -8,7 +8,7 @@ $(function(){
             this.email = userTasksJSON.email;
             this.admin = userTasksJSON.admin;
 
-            this.user_projects = userTasksJSON.user_projects;
+            this.user_tasks = userTasksJSON.user_tasks;
             
         }
      
@@ -19,16 +19,12 @@ $(function(){
             html += `<p>${this.first_name} ${this.last_name}</p>`;
             html += `<p>Your list of pending tasks is as follows:</p>`;
 
-            this.user_projects.forEach(project => {
-                html += `<p><a href="https://www.w3schools.com">${project.name}</a></p>`;
-                let uniq_tasks = [...new Set(project.user_tasks)];
-                uniq_tasks.forEach(task => {
-                    html += `<p><a href="https://www.w3schools.com">${task.content}</a></p>`;
-                });
+            this.user_tasks.forEach(task => {
+                html += `<p><a href="">${task.content}</a></p>`;
             });
             
             
-            
+    
 
             $("div.usertasks").append(html);
         }

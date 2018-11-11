@@ -10,9 +10,17 @@ class ProjectsController < ApplicationController
       @users = User.where(id: current_user.id)
       @projects = Project.all.status
     end
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @projects, status: 201}
+    end  
   end
 
-  def show    
+  def show  
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @project, status: 201}
+    end  
   end
 
   def new

@@ -23,7 +23,7 @@
 
       <% if current_user.admin %>
       <div class="links">
-        <%= link_to "More Info", project_path(project) %>
+        <%= link_to "More Info", project_path(project), class: "more_info" %>
         <%= link_to "Edit Project", [:edit, project] %>
         <%=   link_to project_path(project), method: :delete, data: { confirm: 'Are you sure you want to delete this Project? All project tasks shall also be deleted.' } do %> 
           

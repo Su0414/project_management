@@ -20,7 +20,7 @@ $(function(){
             html += `<p>Your list of pending tasks is as follows:</p>`;
 
             this.user_tasks.forEach(task => {
-                html += `<p><a href="">${task.content}</a></p>`;
+                html += `<p><a href="/projects/${task.project_id}/tasks/${task.id}/edit">${task.content}</a></p>`;
             });
             
             

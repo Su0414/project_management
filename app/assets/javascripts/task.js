@@ -15,7 +15,9 @@ $(function(){
             formatTdhtml += `<table>`; 
             this.format_tasks.forEach(task => {
             
-                formatTdhtml += `<tr><td data-id=${task.id}> `
+                formatTdhtml += `<tr>
+                                    <td data-id=${task.id}> `
+
                 if(task.completed_at!=null){
                     formatTdhtml += `<strike>${task.content}</strike>`;
                 }else{
@@ -25,8 +27,20 @@ $(function(){
             
                 formatTdhtml += `</td>
                                      <td data-id=${task.id}>
-                                     <a href=""><i class="fa fa-check"></i></a></td>
-                                     <td data-id=${task.id}><a href=""><i class="fa fa-trash"></i></a></td></tr>`
+                                        <a href="/projects/${task.project_id}/tasks/${task.id}/complete">
+                                        <div class="complete">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                        </a>
+                                     </td>
+                                     <td data-id=${task.id}>
+                                        <a href="/projects/${task.project_id}/tasks/${task.id}/delete">
+                                        <div class="trash">
+                                            <i class="fa fa-trash"></i>
+                                        </div>
+                                        </a>
+                                     </td>
+                                     </tr>`
             });
             formatTdhtml += `</table>`
             return formatTdhtml;
@@ -35,7 +49,7 @@ $(function(){
         renderTasks(){
             let html = this.renderTd();
             $("div.projecttasks").append(html);  
-        };
+        }
 
         
 

@@ -9,9 +9,7 @@ class TasksController < ApplicationController
     
     if @task.save
       flash[:notice] = "Successfully created task."
-      #redirect_to @project
       respond_to do |format|
-        # format.html { render :show, :layout => false }
         format.json { render json: @project, status: 201}
       end
     else 
@@ -23,7 +21,6 @@ class TasksController < ApplicationController
   def index    
     @user = User.find_by(id: params[:user_id])    
     respond_to do |format|
-      # format.html { render :index, :layout => false }
       format.json { render json: @user, status: 201}
     end
   end 

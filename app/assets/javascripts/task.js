@@ -1,19 +1,17 @@
 $(function(){
     
     class Task {
-        constructor(taskJSON, type) {
-            if(type === "all" || "new"){
-                this.format_tasks = taskJSON.all_tasks;
-            }
+        constructor(taskJSON, type) {            
             if(type === "completed"){
                 this.format_tasks = taskJSON.completed_tasks;
+            }else{
+                this.format_tasks = taskJSON.all_tasks;
             }
         }       
         
         renderTd(){
             let formatTdhtml = "" ;
-            formatTdhtml += `                            
-                             <table>`; 
+            formatTdhtml += `<table>`; 
             this.format_tasks.forEach(task => {
             
                 formatTdhtml += `<tr>
@@ -58,7 +56,15 @@ $(function(){
         renderTasks(){
             let html = this.renderTd();
             $("div.projecttasks").append(html);  
-        }
+        }        
+    }
+
+    function displayAllTasks(response){        
+        $("div.projecttasks").html('');
+        let type = "all";
+        let mytask = new Task(response, type);
+        let display_tasks = mytask.renderTasks();
+        $("div.projecttasks").append(display_tasks);            
     }
         
     // submitting completed project tasks through JS
@@ -82,11 +88,7 @@ $(function(){
         .success(function(response) {
             // alert(response);
             // debugger;  
-            $("div.projecttasks").html('');
-            let type = "all";
-            let mytask = new Task(response, type);
-            let display_tasks = mytask.renderTasks();
-            $("div.projecttasks").append(display_tasks);
+            displayAllTasks(response);
         });
     });  
 
@@ -95,26 +97,21 @@ $(function(){
         e.preventDefault();
         var url = this.action;
         var data = $(this).serialize();
-        $.ajax({
-            type: "POST",
-            url: url, 
-            data: data,
-            success: function(response) { 
-                
-            $("div.projecttasks").html('');
-            let type = "new";
-            let mytask = new Task(response, type);
-            let display_tasks = mytask.renderTasks();
-            $("div.projecttasks").append(display_tasks);
-            $("#task_content").val("");        
-                
-            }
-        });  
+             
+        let posting = $.post(url, data);
+        //debugger; 
+        posting.done(function(response){
+            displayAllTasks(response);
+            $("#task_content").val("");
+        })
+        .fail(function() {
+            alert( "error" );
+        });
+        
     });    
 
     // submitting mark complete form through AJAX -Lower level
     $('a.complete_task').on('click',function(e){   
-        // alert(this.url);
         e.preventDefault();
         var url = this.href;
         var data = $(this).serialize();
@@ -123,12 +120,7 @@ $(function(){
             url: url, 
             data: data,
             success: function(response) { 
-                // alert(response);
-            $("div.projecttasks").html('');
-            let type = "all";
-            let mytask = new Task(response, type);
-            let display_tasks = mytask.renderTasks();
-            $("div.projecttasks").append(display_tasks);
+                displayAllTasks(response);
             $("#task_content").val("");        
                 
             }
@@ -145,14 +137,8 @@ $(function(){
             url: url, 
             data: data,
             success: function(response) { 
-                
-            $("div.projecttasks").html('');
-            let type = "all";
-            let mytask = new Task(response, type);
-            let display_tasks = mytask.renderTasks();
-            $("div.projecttasks").append(display_tasks);
-            $("#task_content").val("");        
-                
+                displayAllTasks(response);
+                $("#task_content").val("");               
             }
         });  
     });    

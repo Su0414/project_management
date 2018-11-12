@@ -67,18 +67,13 @@ class ProjectsController < ApplicationController
   end 
 
   def completed
-    # @tasks = @project.tasks.completed
-    # render :"/tasks/completed"
     respond_to do |format|
-      # format.html { render :"/tasks/completed", :layout => false }
       format.json { render json: @project, status: 201}
     end
   end 
 
   def alltasks  
-    # @tasks = @project.tasks 
     respond_to do |format|
-      # format.html { render partial: "tasks/task", :layout => false }
       format.json { render json: @project, status: 201}
     end
   end 

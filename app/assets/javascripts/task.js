@@ -114,7 +114,7 @@ $(function(){
 
     // submitting mark complete form through AJAX -Lower level
     $('a.complete_task').on('click',function(e){   
-        alert(this.url);
+        // alert(this.url);
         e.preventDefault();
         var url = this.href;
         var data = $(this).serialize();
@@ -123,7 +123,7 @@ $(function(){
             url: url, 
             data: data,
             success: function(response) { 
-                alert(response);
+                // alert(response);
             $("div.projecttasks").html('');
             let type = "all";
             let mytask = new Task(response, type);

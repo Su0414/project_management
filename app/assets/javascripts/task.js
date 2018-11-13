@@ -9,7 +9,7 @@ $(function(){
             }
         }       
         
-        renderTd(){
+        renderTable(){
             let formatTdhtml = "" ;
             formatTdhtml += `<table>`; 
             this.format_tasks.forEach(task => {
@@ -54,7 +54,7 @@ $(function(){
         }
        
         renderTasks(){
-            let html = this.renderTd();
+            let html = this.renderTable();
             $("div.projecttasks").append(html);  
         }        
     }
@@ -76,8 +76,11 @@ $(function(){
             $("div.projecttasks").html('');
             let type = "completed";
             let mytask = new Task(response, type);
-            let display_tasks = mytask.renderTasks();
+            let display_tasks = mytask.renderTasks();           
             $("div.projecttasks").append(display_tasks);
+            
+        }).error(function() {
+            alert( "Load Error" );
         });
     });  
 
@@ -86,26 +89,27 @@ $(function(){
         e.preventDefault();
         $.get(this.href)
         .success(function(response) {
-            // alert(response);
-            // debugger;  
             displayAllTasks(response);
+        }).error(function() {
+            alert( "Load Error" );
         });
     });  
 
     // submitting form through AJAX -Lower level
-    $('#new_task').on('submit', function(e){          
+    $('#new_task').on('submit', function(e){ 
         e.preventDefault();
         var url = this.action;
         var data = $(this).serialize();
              
         let posting = $.post(url, data);
         //debugger; 
-        posting.done(function(response){
-            displayAllTasks(response);
-            $("#task_content").val("");
-        })
-        .fail(function() {
-            alert( "error" );
+        posting.done(
+            function(response){
+                displayAllTasks(response);
+                $("#task_content").val("");
+        });
+        posting.error(function() {
+            alert( "Task cannot be blank or Task already exists" );
         });
         
     });    

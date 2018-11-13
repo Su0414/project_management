@@ -1,6 +1,7 @@
 class Task < ActiveRecord::Base
   validates :content, presence: true
-
+  validates :content, uniqueness: { scope: :project_id,
+                                  message: "Projects should have unique tasks" }
     belongs_to :project
     belongs_to :user
 

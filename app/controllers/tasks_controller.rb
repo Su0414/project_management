@@ -14,7 +14,9 @@ class TasksController < ApplicationController
       end
     else 
       flash[:notice] = "Ooopss ...Task was not created.Check if this task already exists or content can not be blank"
-      redirect_to @project
+      respond_to do |format|
+        format.json { render json: @project, status: 403}
+      end
     end
   end
 

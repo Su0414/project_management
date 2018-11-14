@@ -1,9 +1,12 @@
 $(function(){
     class Project{
-        constructor(projectJSON){
+        constructor(projectJSON, type){
             this.id = projectJSON.id;
             this.name = projectJSON.name;
             this.description = projectJSON.description;
+            this.status = projectJSON.status;
+            this.current_user = projectJSON.current_user;
+            this.current_user_name = projectJSON.current_user_name;
 
             //this.attachProjectListners();
         }

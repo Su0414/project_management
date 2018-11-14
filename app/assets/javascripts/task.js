@@ -1,52 +1,83 @@
 $(function(){
     
     class Task {
-        constructor(taskJSON, type) {            
+        constructor(taskJSON, type) {  
+            this.current_user = taskJSON.logged_user;
             if(type === "completed"){
                 this.format_tasks = taskJSON.completed_tasks;
             }else{
                 this.format_tasks = taskJSON.all_tasks;
             }
-        }       
+        }     
+        
+        renderContent(task){
+            let formatContent = "";
+            if(task.completed_at!=null){
+                formatContent += `<strike>${task.content}</strike>`;
+            }else{    
+                formatContent += `${task.content}`;
+            }
+            return formatContent;
+        }
+
+        renderMarkComplete(task){
+            let formatIcon = "";
+            if(task.completed_at!=null){
+                formatIcon += `<i style="opacity:0.4;" class="fa fa-check"></i>`;
+            }else{  
+                if(this.current_user.id === task.user_id)  {
+                formatIcon += `<a href="/projects/${task.project_id}/tasks/${task.id}/complete", data-method="PATCH", class="complete_task">
+                <div class="complete">
+                    <i class="fa fa-check">
+                </i></div>
+            </a>`;
+                }
+            }
+            return formatIcon;
+        }
+
+        renderDelete(task){
+            let formatIcon = "";
+            if(this.current_user.id === task.user_id)  {
+                    formatIcon += `<a href="/projects/${task.project_id}/tasks/${task.id}", data-method="DELETE", class="delete_task">
+                    <div class="trash">
+                        <i class="fa fa-trash"></i>
+                    </div>
+                    </a>`;                
+            }
+            return formatIcon;
+        }
         
         renderTable(){
             let formatTdhtml = "" ;
             formatTdhtml += `<table>`; 
+            formatTdhtml += `<tr>
+                                <td>Task Content</td>
+                                <td>Mark Complete</td>
+                                <td>Delete Task</td>
+                            </tr>`;
             this.format_tasks.forEach(task => {
             
-                formatTdhtml += `<tr>
-                                    <td data-id=${task.id}> 
+                formatTdhtml += `<tr>`;
+                formatTdhtml +=`<td data-id=${task.id}> 
                                     <div class="task">`
 
-                if(task.completed_at!=null){
-                    formatTdhtml += `<strike>${task.content}</strike>`;
-                }else{
-                    formatTdhtml += `${task.content}`;
-                }            
+                formatTdhtml += this.renderContent(task);
+                         
            
                 formatTdhtml += `</div>
-                                    </td>
-                                     <td edit-id=${task.id}>`;
-                                        
-                
-                if(task.completed_at!=null){
-                    formatTdhtml += `<i style="opacity:0.4;" class="fa fa-check"></i>`;
-                }else{
-                    formatTdhtml += `<a href="/projects/${task.project_id}/tasks/${task.id}/complete", data-method="PATCH", class="complete_task">
-                                        <div class="complete">
-                                            <i class="fa fa-check">
-                                        </i></div>
-                                    </a>`;
-                }
+                                    </td>`;
+            
+                formatTdhtml +=`<td edit-id=${task.id}>`;                                      
+                            
+                formatTdhtml += this.renderMarkComplete(task);                                       
 
                 formatTdhtml += `</td>
-                                     <td delete-id=${task.id}>
-                                        <a href="/projects/${task.project_id}/tasks/${task.id}", data-method="DELETE", class="delete_task">
-                                        <div class="trash">
-                                            <i class="fa fa-trash"></i>
-                                        </div>
-                                        </a>
-                                     </td>
+                                     <td delete-id=${task.id}>`;
+                
+                formatTdhtml += this.renderDelete(task);
+
+                formatTdhtml +=`</td>
                                 </tr>`;
             });
             formatTdhtml += `</table>`

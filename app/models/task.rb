@@ -17,5 +17,9 @@ class Task < ActiveRecord::Base
    def project_name(id)    
     return Project.select(:id, :name).where(id: id)
    end 
+
+   def user_name(id)    
+    return User.select(:id, :first_name, :last_name).where(id: id)
+   end 
   
   end

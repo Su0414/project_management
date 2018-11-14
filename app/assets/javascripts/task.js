@@ -12,11 +12,11 @@ $(function(){
         
         renderContent(task){
             let formatContent = "";
-            formatContent += `Assigned to user : ${task.user_id} `;
+            formatContent += `Assigned to: ${task.user[0].first_name} ${task.user[0].last_name} <br/>`;
             if(task.completed_at!=null){
                 formatContent += `<strike>${task.content}</strike>`;
             }else{
-                if(this.current_user.id === task.user_id)  {
+                if(this.current_user.id === task.user[0].id)  {
                     formatContent +=`<a href="/projects/${task.project_id}/tasks/${task.id}/edit">`;
                     formatContent += `${task.content}`;
                     formatContent +=`</a>`;
@@ -32,7 +32,7 @@ $(function(){
             if(task.completed_at!=null){
                 formatIcon += `<i style="opacity:0.4;" class="fa fa-check"></i>`;
             }else{  
-                if(this.current_user.id === task.user_id)  {
+                if(this.current_user.id === task.user[0].id)  {
                 formatIcon += `<a href="/projects/${task.project_id}/tasks/${task.id}/complete", data-method="PATCH", class="complete_task">
                 <div class="complete">
                     <i class="fa fa-check">
@@ -45,7 +45,7 @@ $(function(){
 
         renderDelete(task){
             let formatIcon = "";
-            if(this.current_user.id === task.user_id)  {
+            if(this.current_user.id === task.user[0].id)  {
                     formatIcon += `<a href="/projects/${task.project_id}/tasks/${task.id}", data-method="DELETE", class="delete_task">
                     <div class="trash">
                         <i class="fa fa-trash"></i>
@@ -57,12 +57,15 @@ $(function(){
         
         renderTable(){
             let formatTdhtml = "" ;
-            formatTdhtml += `<table>`; 
-            formatTdhtml += `<tr><strong>
-                                <td>Task Content</td>
-                                <td>Mark Complete</td>
-                                <td>Delete Task</td>
-                                </strong>
+            formatTdhtml += `<table width="100%">`; 
+            if(this.format_tasks.length === 0){
+                formatTdhtml += `There are no tasks added for this project.`;
+            }else{
+            formatTdhtml += `<tr>
+                                <td width="60%"><strong>Task Content</strong></td>
+                                <td width="20%"><strong>Mark Complete</strong></td>
+                                <td width="20%"><strong>Delete Task</strong></td>
+                                
                             </tr>`;
             this.format_tasks.forEach(task => {
             
@@ -87,7 +90,9 @@ $(function(){
 
                 formatTdhtml +=`</td>
                                 </tr>`;
-            });
+                
+                });
+            }
             formatTdhtml += `</table>`
             return formatTdhtml;
         }
@@ -97,10 +102,6 @@ $(function(){
             $("div.projecttasks").append(html);  
         }        
     }
-
-    // get Project Name from project id
-
-    
 
     function displayAllTasks(response){        
         $("div.projecttasks").html('');

@@ -20,10 +20,12 @@ $(function(){
             if(this.user_tasks.length === 0){
                 html += `<p>You have completed all tasks. There are no pending tasks.</p>`;
             }else{    
+                html += `<p>${this.first_name} ${this.last_name}</p>`;
+                html += `<p>Your list of pending tasks is as follows:</p>`;
                 this.user_tasks.forEach(task => {
-                    html += `<p>${this.first_name} ${this.last_name}</p>`;
-                    html += `<p>Your list of pending tasks is as follows:</p>`;
-                    html += `<p><a href="/projects/${task.project_id}/tasks/${task.id}/edit">${task.content}</a></p>`;
+
+                    html += `<p><a href="/projects/${task.project_id}/tasks/${task.id}/edit">${task.content}</a>`;
+                    html += ` for project : <a href="/projects/${task.project_id}">${task.project_id}</a></p>`;
                 });
             }
             

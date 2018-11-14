@@ -12,10 +12,17 @@ $(function(){
         
         renderContent(task){
             let formatContent = "";
+            formatContent += `Assigned to user : ${task.user_id} `;
             if(task.completed_at!=null){
                 formatContent += `<strike>${task.content}</strike>`;
-            }else{    
-                formatContent += `${task.content}`;
+            }else{
+                if(this.current_user.id === task.user_id)  {
+                    formatContent +=`<a href="/projects/${task.project_id}/tasks/${task.id}/edit">`;
+                    formatContent += `${task.content}`;
+                    formatContent +=`</a>`;
+                }else{
+                    formatContent += `${task.content}`;
+                }
             }
             return formatContent;
         }
@@ -51,10 +58,11 @@ $(function(){
         renderTable(){
             let formatTdhtml = "" ;
             formatTdhtml += `<table>`; 
-            formatTdhtml += `<tr>
+            formatTdhtml += `<tr><strong>
                                 <td>Task Content</td>
                                 <td>Mark Complete</td>
                                 <td>Delete Task</td>
+                                </strong>
                             </tr>`;
             this.format_tasks.forEach(task => {
             
@@ -89,6 +97,10 @@ $(function(){
             $("div.projecttasks").append(html);  
         }        
     }
+
+    // get Project Name from project id
+
+    
 
     function displayAllTasks(response){        
         $("div.projecttasks").html('');

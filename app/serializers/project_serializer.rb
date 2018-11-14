@@ -17,6 +17,7 @@ class ProjectSerializer < ActiveModel::Serializer
         id: task.id,
         content: task.content, 
         project_id: task.project_id,
+        user_id: task.user_id,    
         completed_at: task.completed_at     
       }
     end 
@@ -29,7 +30,8 @@ class ProjectSerializer < ActiveModel::Serializer
         content: task.content,
         project_id: task.project_id,
         user_id: task.user_id,        
-        completed_at: task.completed_at      
+        completed_at: task.completed_at,
+        project: task.project_name(task.project_id)   
       }
     end 
   end 

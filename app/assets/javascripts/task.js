@@ -2,6 +2,7 @@ $(function(){
     
     class Task {
         constructor(taskJSON, type) {  
+            this.status = taskJSON.status;
             this.current_user = taskJSON.logged_user;
             if(type === "completed"){
                 this.format_tasks = taskJSON.completed_tasks;
@@ -16,7 +17,7 @@ $(function(){
             if(task.completed_at!=null){
                 formatContent += `<strike>${task.content}</strike>`;
             }else{
-                if(this.current_user.id === task.user[0].id)  {
+                if(this.status === "active" && this.current_user.id === task.user[0].id)  {
                     formatContent +=`<a href="/projects/${task.project_id}/tasks/${task.id}/edit">`;
                     formatContent += `${task.content}`;
                     formatContent +=`</a>`;
@@ -32,7 +33,7 @@ $(function(){
             if(task.completed_at!=null){
                 formatIcon += `<i style="opacity:0.4;" class="fa fa-check"></i>`;
             }else{  
-                if(this.current_user.id === task.user[0].id)  {
+                if(this.status === "active" && this.current_user.id === task.user[0].id)  {
                 formatIcon += `<a href="/projects/${task.project_id}/tasks/${task.id}/complete", data-method="PATCH", class="complete_task">
                 <div class="complete">
                     <i class="fa fa-check">
@@ -45,7 +46,7 @@ $(function(){
 
         renderDelete(task){
             let formatIcon = "";
-            if(this.current_user.id === task.user[0].id)  {
+            if(this.status === "active" && this.current_user.id === task.user[0].id)  {
                     formatIcon += `<a href="/projects/${task.project_id}/tasks/${task.id}", data-method="DELETE", class="delete_task">
                     <div class="trash">
                         <i class="fa fa-trash"></i>
@@ -98,7 +99,8 @@ $(function(){
         }
        
         renderTasks(){
-            let html = this.renderTable();
+            let html = "";
+            html += this.renderTable();
             $("div.projecttasks").append(html);  
         }        
     }

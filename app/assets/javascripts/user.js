@@ -38,15 +38,20 @@ $(function(){
                 html += `</tr>`;
 
                 this.user_tasks.forEach(task => {
-                    html += `<tr>`;
+                    if(task.project[0].status === "active"){
+                        html += `<tr>`;
 
-                    if(this.current_user.id === task.user[0].id){
-                        html += `<td width="65%">`;
-                        html += `<p><a href="/projects/${task.project[0].id}/tasks/${task.id}/edit">${task.content}</a>`;
-                        html += `</td>`;
-                        html += `<td width="33%">`;
-                        html += `<a href="/projects/${task.project[0].id}">${task.project[0].name}</a></p>`;
-                        html += `</td>`;
+                        if(this.current_user.id === task.user[0].id){
+                            html += `<td width="65%">`;
+                            
+                                html += `<a href="/projects/${task.project[0].id}/tasks/${task.id}/edit">${task.content}</a>`;
+                        
+                            html += `</td>`;
+
+                            html += `<td width="33%">`;
+                            html += `<a href="/projects/${task.project[0].id}">${task.project[0].name}</a></p>`;
+                            html += `</td>`;
+                        }
                     }
                     html += `</tr>`;
                 });

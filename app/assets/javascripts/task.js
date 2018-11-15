@@ -13,7 +13,6 @@ $(function(){
         
         renderContent(task){
             let formatContent = "";
-            formatContent += `Assigned to: ${task.user[0].first_name} ${task.user[0].last_name} <br/>`;
             if(task.completed_at!=null){
                 formatContent += `<strike>${task.content}</strike>`;
             }else{
@@ -63,7 +62,8 @@ $(function(){
                 formatTdhtml += `There are no tasks added for this project.`;
             }else{
             formatTdhtml += `<tr>
-                                <td width="60%"><strong>Task Content</strong></td>
+                                <td width="10%"><strong>Assigned To</strong></td>
+                                <td width="50%"><strong>Task Content</strong></td>
                                 <td width="20%"><strong>Mark Complete</strong></td>
                                 <td width="20%"><strong>Delete Task</strong></td>
                                 
@@ -71,6 +71,8 @@ $(function(){
             this.format_tasks.forEach(task => {
             
                 formatTdhtml += `<tr>`;
+                formatTdhtml += `<td><strong>${task.user[0].first_name} ${task.user[0].last_name}<strong></td>`; 
+
                 formatTdhtml +=`<td data-id=${task.id}> 
                                     <div class="task">`
 

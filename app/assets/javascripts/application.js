@@ -15,7 +15,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require user.js
-//= require task.js
+//= require project.js
 //= require_tree .
 
 

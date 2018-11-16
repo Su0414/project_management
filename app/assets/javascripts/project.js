@@ -1,13 +1,13 @@
 $(function(){
     
-    class Task {
-        constructor(taskJSON, type) {  
-            this.status = taskJSON.status;
-            this.current_user = taskJSON.logged_user;
+    class Project {
+        constructor(projectJSON, type) {  
+            this.status = projectJSON.status;
+            this.current_user = projectJSON.logged_user;
             if(type === "completed"){
-                this.format_tasks = taskJSON.completed_tasks;
+                this.format_tasks = projectJSON.completed_tasks;
             }else{
-                this.format_tasks = taskJSON.all_tasks;
+                this.format_tasks = projectJSON.all_tasks;
             }
         }     
         
@@ -109,9 +109,9 @@ $(function(){
 
     function displayAllTasks(response){        
         $("div.projecttasks").html('');
-        let type = "all";
-        let mytask = new Task(response, type);
-        let display_tasks = mytask.renderTasks();
+        const type = "all";
+        const show_project = new Project(response, type);
+        const display_tasks = show_project.renderTasks();
         $("div.projecttasks").append(display_tasks);            
     }
         
@@ -122,9 +122,9 @@ $(function(){
         .success(function(response) {
             //debugger;  
             $("div.projecttasks").html('');
-            let type = "completed";
-            let mytask = new Task(response, type);
-            let display_tasks = mytask.renderTasks();           
+            const type = "completed";
+            const show_project = new Project(response, type);
+            const display_tasks = show_project.renderTasks();           
             $("div.projecttasks").append(display_tasks);
             
         }).error(function() {

@@ -9,11 +9,8 @@ $(function(){
             this.admin = userTasksJSON.admin;
             
             this.current_user = userTasksJSON.logged_user;
-
-            this.user_tasks = userTasksJSON.user_tasks;
-            
-        }
-     
+            this.user_tasks = userTasksJSON.user_tasks;            
+        }     
 
         renderUserTasks(){
             $("div.usertasks").html('');
@@ -57,26 +54,18 @@ $(function(){
                 });
                 html += `</table>`;
             }
-            
-    
-
             $("div.usertasks").append(html);
-        }
-      
+        }      
     }
-
-
+    
     // submitting user tasks through JS
     $('a.user_tasks').on('click', function(e){
         e.preventDefault();
         $.get(this.href)
         .success(function(response) { 
-            //debugger;           
-
+            //debugger; 
              const logged_user = new User(response);
-             logged_user.renderUserTasks();       
-
-
+             logged_user.renderUserTasks(); 
         });
     });  
 }); 

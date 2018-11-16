@@ -107,7 +107,7 @@ $(function(){
         }        
     }
 
-    function displayAllTasks(response){        
+    const displayAllTasks = (response) => {        
         $("div.projecttasks").html('');
         const type = "all";
         const show_project = new Project(response, type);

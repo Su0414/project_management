@@ -1,6 +1,5 @@
 class ProjectSerializer < ActiveModel::Serializer
   attributes :id, :name, :description, :status
-  
   attribute :logged_user
   
   attribute :completed_tasks
@@ -9,7 +8,6 @@ class ProjectSerializer < ActiveModel::Serializer
   def logged_user
     current_user
   end 
-
 
   def completed_tasks
     self.object.tasks.completed.map do |task|

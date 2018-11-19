@@ -1,24 +1,16 @@
 # README
+Project Management Application using Rails as Backend and JS as frontend.
+With this application, Project Managers can organise and maintain projects and task related to projects.
+They can handle completed and pending tasks list. 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Installation
 
-Things you may want to cover:
+Clone this repo and run bundle install
 
-* Ruby version
+Run rake db:migrate
 
-* System dependencies
+Run rake db:seed
 
-* Configuration
+Run rails s
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Open your browser to http://127.0.0.1:3000
